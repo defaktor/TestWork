@@ -31,12 +31,7 @@ const MainScreen = ({
   const keyExtractor = useCallback(item => `${item.id}`, []);
   const renderItem = useCallback(
     ({item, index}) => (
-      <ListingCard
-        item={item}
-        index={index}
-        navigation={navigation}
-        setLockUpdate={setLockUpdate}
-      />
+      <ListingCard item={item} index={index} navigation={navigation} />
     ),
     [],
   );
@@ -54,6 +49,14 @@ const MainScreen = ({
   }, [fetchData, makeUpdate]);
   useFocusEffect(
     useCallback(() => {
+      setMakeUpdate({status: true});
+      return () => {
+        setLockUpdate({status: true});
+      };
+    }, []),
+  );
+  useFocusEffect(
+    useCallback(() => {
       const refreshLongTimer = setTimeout(() => {
         setMakeUpdate({status: true});
       }, 1000 * 60);
@@ -64,7 +67,6 @@ const MainScreen = ({
       };
     }, [dataItems]),
   );
-
   useFocusEffect(
     useCallback(() => {
       const refreshShortTimer = setTimeout(() => {

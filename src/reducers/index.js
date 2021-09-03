@@ -50,7 +50,7 @@ const UiStore = handleActions(
   {
     loading: false,
     lockUpdate: false,
-    makeUpdate: true,
+    makeUpdate: false,
   },
 );
 
